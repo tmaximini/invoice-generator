@@ -5,7 +5,7 @@ import { loadCurrent, saveCurrent } from "../lib/storage";
 export function useInvoice() {
   const [inv, setInv] = useState(() => {
     const saved = loadCurrent();
-    return saved || createDefaultInvoice("de");
+    return saved || createDefaultInvoice();
   });
 
   const timerRef = useRef(null);
@@ -75,7 +75,7 @@ export function useInvoice() {
   }, []);
 
   const resetInvoice = useCallback(() => {
-    setInv(createDefaultInvoice("de"));
+    setInv(createDefaultInvoice());
   }, []);
 
   const loadFromTemplate = useCallback((template) => {
