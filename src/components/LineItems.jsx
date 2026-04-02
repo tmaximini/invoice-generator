@@ -16,8 +16,8 @@ export default function LineItems({ inv, addItem, removeItem, updateItem }) {
       </h2>
       <div className="space-y-3">
         <div className="grid grid-cols-12 gap-2 text-xs font-medium text-gray-400 uppercase tracking-wider px-1">
-          <div className="col-span-4">{L.description}</div>
-          <div className="col-span-1">{L.qty}</div>
+          <div className="col-span-3">{L.description}</div>
+          <div className="col-span-2">{L.qty}</div>
           <div className="col-span-2">{L.unit}</div>
           <div className="col-span-2">{L.rate}</div>
           <div className="col-span-2 text-right">{L.amount}</div>
@@ -25,7 +25,7 @@ export default function LineItems({ inv, addItem, removeItem, updateItem }) {
         </div>
         {inv.items.map((item) => (
           <div key={item.id} className="grid grid-cols-12 gap-2 items-center">
-            <div className="col-span-4">
+            <div className="col-span-3">
               <input
                 className={inputCls}
                 placeholder={L.description}
@@ -33,7 +33,7 @@ export default function LineItems({ inv, addItem, removeItem, updateItem }) {
                 onChange={(e) => updateItem(item.id, "description", e.target.value)}
               />
             </div>
-            <div className="col-span-1">
+            <div className="col-span-2">
               <input
                 className={inputCls}
                 type="number"

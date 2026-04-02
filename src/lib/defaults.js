@@ -302,30 +302,45 @@ export const currencies = [
   { code: "CAD", symbol: "C$" },
 ];
 
-// Detect best locale from browser language
+// Detect best locale from browser languages + timezone
 export function detectLocale() {
-  const lang = navigator.language || "es";
-  // Direct match: es-MX → mx, es-AR → ar, etc.
+  const langs = navigator.languages || [navigator.language || "es"];
+
   const regionMap = {
-    "es-MX": "mx",
-    "es-AR": "ar",
-    "es-CO": "co",
-    "es-CL": "cl",
-    "es-PE": "pe",
-    "es-ES": "es",
-    "de-DE": "de",
-    "de-AT": "de",
-    "de-CH": "de",
-    "en-US": "en",
-    "en-GB": "en",
+    "es-MX": "mx", "es-AR": "ar", "es-CO": "co", "es-CL": "cl",
+    "es-PE": "pe", "es-ES": "es", "de-DE": "de", "de-AT": "de",
+    "de-CH": "de", "en-US": "en", "en-GB": "en",
   };
-  if (regionMap[lang]) return regionMap[lang];
-  // Fallback to language prefix
-  const prefix = lang.split("-")[0];
-  if (prefix === "de") return "de";
-  if (prefix === "en") return "en";
-  if (prefix === "es") return "es";
-  // Default to Spanish (primary audience)
+
+  // Check all preferred languages for a direct match
+  for (const lang of langs) {
+    if (regionMap[lang]) return regionMap[lang];
+  }
+  // Check prefixes across all languages
+  for (const lang of langs) {
+    const prefix = lang.split("-")[0];
+    if (prefix === "es") return "es";
+    if (prefix === "de") return "de";
+  }
+
+  // Timezone fallback — catches English-browser users by location
+  const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+  const tzMap = {
+    "Europe/Madrid": "es", "Europe/Barcelona": "es", "Atlantic/Canary": "es",
+    "Europe/Berlin": "de", "Europe/Vienna": "de", "Europe/Zurich": "de",
+    "America/Mexico_City": "mx", "America/Cancun": "mx", "America/Monterrey": "mx",
+    "America/Buenos_Aires": "ar", "America/Argentina/Buenos_Aires": "ar",
+    "America/Bogota": "co",
+    "America/Santiago": "cl",
+    "America/Lima": "pe",
+  };
+  if (tzMap[tz]) return tzMap[tz];
+
+  // If primary language is English but timezone is not US, default to Spain
+  // (generar-factura.com audience is primarily Spanish-speaking)
+  const primary = langs[0]?.split("-")[0];
+  if (primary === "en") return "es";
+
   return "es";
 }
 

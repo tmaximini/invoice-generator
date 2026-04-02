@@ -64,20 +64,23 @@ export default function App() {
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div
-              className="w-9 h-9 rounded-lg flex items-center justify-center text-white font-bold text-sm"
+              className="w-9 h-9 rounded-lg flex items-center justify-center text-white"
               style={{ background: "linear-gradient(135deg, #d4a017, #b8860b)" }}
             >
-              IN
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 2 11 13" />
+                <path d="M22 2 15 22 11 13 2 9Z" />
+              </svg>
             </div>
             <div>
               <h1
                 className="text-lg font-bold text-gray-800"
                 style={{ letterSpacing: "-0.02em" }}
               >
-                Invoice Generator
+                {inv.locale === "de" ? "Rechnungsgenerator" : inv.locale === "en" ? "Invoice Generator" : "Generador de Facturas"}
               </h1>
               <p className="text-xs text-gray-400">
-                Create professional invoices in seconds
+                {inv.locale === "de" ? "Professionelle Rechnungen in Sekunden" : inv.locale === "en" ? "Create professional invoices in seconds" : "Crea facturas profesionales en segundos"}
               </p>
             </div>
           </div>
@@ -153,6 +156,14 @@ export default function App() {
             total={total}
           />
         )}
+      </div>
+
+      {/* Site footer */}
+      <div className="py-6 text-center text-xs text-gray-400">
+        Built with 💚 at{" "}
+        <a href="https://mxmn.net" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-600 transition-colors">
+          mxmn
+        </a>
       </div>
     </div>
   );

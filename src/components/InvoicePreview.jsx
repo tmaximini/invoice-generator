@@ -95,56 +95,61 @@ export default function InvoicePreview({
           </div>
 
           {/* Items table */}
-          <table className="w-full mb-8" style={{ borderCollapse: "collapse" }}>
-            <thead>
-              <tr className="text-xs font-bold text-gray-400 uppercase tracking-wider">
-                <td className="pb-3 pr-4">{L.description}</td>
-                <td className="pb-3 pr-4 text-right" style={{ width: 50 }}>
-                  {L.qty}
-                </td>
-                <td className="pb-3 pr-4 text-center" style={{ width: 60 }}>
-                  {L.unit}
-                </td>
-                <td className="pb-3 pr-4 text-right" style={{ width: 100 }}>
-                  {L.rate}
-                </td>
-                <td className="pb-3 text-right" style={{ width: 110 }}>
-                  {L.amount}
-                </td>
-              </tr>
-            </thead>
-            <tbody>
-              {inv.items.map((item) => (
-                <tr key={item.id} className="border-t border-gray-50">
-                  <td className="py-3 pr-4 text-sm text-gray-700">
-                    {item.description || "—"}
-                  </td>
-                  <td className="py-3 pr-4 text-sm text-gray-500 text-right">
-                    {item.qty ?? ""}
-                  </td>
-                  <td className="py-3 pr-4 text-sm text-gray-500 text-center">
-                    {item.unit}
-                  </td>
-                  <td
-                    className="py-3 pr-4 text-sm text-gray-500 text-right"
-                    style={{ fontFamily: "'JetBrains Mono', monospace" }}
-                  >
-                    {fmt(item.rate)}
-                  </td>
-                  <td
-                    className="py-3 text-sm font-medium text-gray-800 text-right"
-                    style={{ fontFamily: "'JetBrains Mono', monospace" }}
-                  >
-                    {fmt((item.qty || 1) * item.rate)}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          {(() => {
+            const hasQty = inv.items.some((i) => i.qty != null);
+            return (
+              <table className="w-full mb-8" style={{ borderCollapse: "collapse" }}>
+                <thead>
+                  <tr className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+                    <td className="pb-3 pr-4">{L.description}</td>
+                    {hasQty && (
+                      <>
+                        <td className="pb-3 pr-4 text-right" style={{ width: 50 }}>{L.qty}</td>
+                        <td className="pb-3 pr-4 text-center" style={{ width: 60 }}>{L.unit}</td>
+                        <td className="pb-3 pr-4 text-right" style={{ width: 100 }}>{L.rate}</td>
+                      </>
+                    )}
+                    <td className="pb-3 text-right" style={{ width: 110 }}>{L.amount}</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {inv.items.map((item) => (
+                    <tr key={item.id} className="border-t border-gray-50">
+                      <td className="py-3 pr-4 text-sm text-gray-700">
+                        {item.description || "—"}
+                      </td>
+                      {hasQty && (
+                        <>
+                          <td className="py-3 pr-4 text-sm text-gray-500 text-right">
+                            {item.qty ?? ""}
+                          </td>
+                          <td className="py-3 pr-4 text-sm text-gray-500 text-center">
+                            {item.qty != null ? item.unit : ""}
+                          </td>
+                          <td
+                            className="py-3 pr-4 text-sm text-gray-500 text-right"
+                            style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                          >
+                            {item.qty != null ? fmt(item.rate) : ""}
+                          </td>
+                        </>
+                      )}
+                      <td
+                        className="py-3 text-sm font-medium text-gray-800 text-right"
+                        style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                      >
+                        {fmt((item.qty || 1) * item.rate)}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            );
+          })()}
 
           {/* Totals */}
           <div className="flex justify-end">
-            <div className="w-64 space-y-2">
+            <div className="w-80 space-y-2">
               <div className="flex justify-between text-sm text-gray-500">
                 <span>{L.subtotal}</span>
                 <span style={{ fontFamily: "'JetBrains Mono', monospace" }}>
@@ -161,7 +166,19 @@ export default function InvoicePreview({
                   </span>
                 </div>
               )}
-              {inv.taxRate > 0 && (
+              {inv.showReverseCharge ? (
+                <div className="text-sm text-gray-500">
+                  <div className="flex justify-between">
+                    <span>{inv.taxLabel} (0%)</span>
+                    <span style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                      {fmt(0)}
+                    </span>
+                  </div>
+                  {inv.reverseChargeNote && (
+                    <p className="text-xs text-gray-400 mt-1">{inv.reverseChargeNote}</p>
+                  )}
+                </div>
+              ) : inv.taxRate > 0 ? (
                 <div className="flex justify-between text-sm text-gray-500">
                   <span>
                     {inv.taxLabel} ({inv.taxRate}%)
@@ -170,7 +187,7 @@ export default function InvoicePreview({
                     {fmt(taxAmt)}
                   </span>
                 </div>
-              )}
+              ) : null}
               <div className="flex justify-between items-center pt-3 mt-2 border-t-2 border-gray-800">
                 <span className="text-sm font-bold text-gray-800 uppercase tracking-wider">
                   {L.total}
@@ -228,14 +245,6 @@ export default function InvoicePreview({
             </div>
           )}
 
-          {/* Reverse Charge */}
-          {inv.showReverseCharge && inv.reverseChargeNote && (
-            <div className="mt-6 pt-4 border-t border-gray-100">
-              <p className="text-xs text-gray-500">
-                {inv.reverseChargeNote}
-              </p>
-            </div>
-          )}
         </div>
 
         {/* Footer */}
