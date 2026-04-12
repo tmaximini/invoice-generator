@@ -304,6 +304,10 @@ export const currencies = [
 
 // Detect best locale from browser languages + timezone
 export function detectLocale() {
+  // Respect ?locale= param from country landing pages
+  const urlLocale = new URLSearchParams(window.location.search).get("locale");
+  if (urlLocale && localePresets[urlLocale]) return urlLocale;
+
   const langs = navigator.languages || [navigator.language || "es"];
 
   const regionMap = {
