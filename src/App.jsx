@@ -6,6 +6,7 @@ import { generatePdf } from "./lib/pdf";
 import InvoiceForm from "./components/InvoiceForm";
 import InvoicePreview from "./components/InvoicePreview";
 import TemplateManager from "./components/TemplateManager";
+import FaqSection from "./components/FaqSection";
 
 export default function App() {
   const {
@@ -157,6 +158,8 @@ export default function App() {
           />
         )}
       </div>
+
+      <FaqSection locale={inv.locale} />
 
       {/* Site footer */}
       <div className="py-6 text-center text-xs text-gray-400">

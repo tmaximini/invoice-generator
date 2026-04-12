@@ -62,14 +62,145 @@
     }
     </script>
 
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="es" href="https://generar-factura.com/" />
+    <link rel="alternate" hreflang="de" href="https://generar-factura.com/" />
+    <link rel="alternate" hreflang="en" href="https://generar-factura.com/" />
+    <link rel="alternate" hreflang="x-default" href="https://generar-factura.com/" />
+
+    <!-- FAQ Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo generar una factura gratis en PDF?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Selecciona tu país, rellena los datos del emisor y receptor, añade los productos o servicios con sus precios, y pulsa Descargar PDF. No necesitas registro ni cuenta."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué países y tipos de IVA soporta el generador?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "España (IVA 21%, 10%, 4%), México (IVA 16%), Argentina (IVA 21%, 10.5%, 27%), Colombia (IVA 19%, 5%), Chile (IVA 19%), Perú (IGV 18%), Alemania (USt. 19%, 7%) y Estados Unidos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Se guardan mis datos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Todo se procesa en tu navegador. Ningún dato se envía a servidores externos. Tu información permanece completamente privada."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo añadir mi logo a la factura?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Sube cualquier imagen (PNG, JPG, SVG) y aparecerá en la esquina de tu factura. También puedes eliminarlo en cualquier momento."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es Reverse Charge o inversión del sujeto pasivo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Es un mecanismo fiscal usado en la UE donde el receptor de la factura es responsable de declarar el IVA en lugar del emisor. Útil para facturas intracomunitarias entre empresas (B2B)."
+          }
+        }
+      ]
+    }
+    </script>
+
     <!-- Favicon (inline SVG) -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%23d4a017'/><g transform='translate(18 18) scale(2.8)' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M22 2 11 13'/><path d='M22 2 15 22 11 13 2 9Z'/></g></svg>" />
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Static SEO content — replaced by React on mount -->
+      <header style="padding:24px;max-width:960px;margin:0 auto">
+        <h1>Generar Factura Gratis — Crear y Descargar Facturas en PDF</h1>
+        <p>Generador de facturas online gratuito. Crea facturas profesionales en PDF en segundos, sin registro ni cuenta. Soporta formatos fiscales de <strong>España, México, Argentina, Colombia, Chile, Perú, Alemania</strong> y <strong>Estados Unidos</strong>.</p>
+      </header>
+
+      <main style="padding:0 24px;max-width:960px;margin:0 auto">
+        <section>
+          <h2>Cómo funciona</h2>
+          <ol>
+            <li><strong>Elige tu país</strong> — se ajustan automáticamente el IVA, la moneda y el formato fiscal (NIF, RFC, CUIT, NIT, RUT, RUC, USt-IdNr.).</li>
+            <li><strong>Rellena los datos</strong> — emisor, receptor, productos o servicios, precios y cantidades.</li>
+            <li><strong>Descarga en PDF</strong> — tu factura se genera al instante en el navegador. Sin esperas, sin servidores.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Países y tasas de impuesto soportados</h2>
+          <ul>
+            <li><strong>España</strong> — IVA general 21%, reducido 10%, superreducido 4%. Identificación: NIF/CIF.</li>
+            <li><strong>México</strong> — IVA 16%. Identificación: RFC.</li>
+            <li><strong>Argentina</strong> — IVA 21%, 10.5%, 27%. Identificación: CUIT.</li>
+            <li><strong>Colombia</strong> — IVA 19%, 5%. Identificación: NIT.</li>
+            <li><strong>Chile</strong> — IVA 19%. Identificación: RUT.</li>
+            <li><strong>Perú</strong> — IGV 18%. Identificación: RUC.</li>
+            <li><strong>Alemania (Deutschland)</strong> — USt. 19%, ermäßigt 7%. Rechnungsgenerator mit USt-IdNr., IBAN, BIC und Reverse-Charge-Hinweis.</li>
+            <li><strong>Estados Unidos (USA)</strong> — Sales Tax configurable. Invoice generator with customizable tax rates.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Funcionalidades</h2>
+          <ul>
+            <li>Descarga directa en PDF de alta calidad</li>
+            <li>Logo personalizado en la factura</li>
+            <li>Datos bancarios: IBAN, BIC/SWIFT, titular de cuenta</li>
+            <li>Reverse Charge / Inversión del sujeto pasivo para facturas intracomunitarias</li>
+            <li>Múltiples monedas: EUR, USD, MXN, ARS, COP, CLP, PEN, GBP, CHF, JPY</li>
+            <li>Plantillas guardadas en el navegador para reutilizar datos</li>
+            <li>100% privado — todo se procesa localmente, sin enviar datos a servidores</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Preguntas frecuentes</h2>
+
+          <h3>¿Cómo generar una factura gratis en PDF?</h3>
+          <p>Selecciona tu país, rellena los datos del emisor y receptor, añade los productos o servicios con sus precios, y pulsa "Descargar PDF". No necesitas registro ni cuenta.</p>
+
+          <h3>¿Qué países y tipos de IVA soporta el generador?</h3>
+          <p>España (IVA 21%, 10%, 4%), México (IVA 16%), Argentina (IVA 21%, 10.5%, 27%), Colombia (IVA 19%, 5%), Chile (IVA 19%), Perú (IGV 18%), Alemania (USt. 19%, 7%) y Estados Unidos.</p>
+
+          <h3>¿Se guardan mis datos?</h3>
+          <p>No. Todo se procesa en tu navegador. Ningún dato se envía a servidores externos. Tu información permanece completamente privada.</p>
+
+          <h3>¿Puedo añadir mi logo a la factura?</h3>
+          <p>Sí. Sube cualquier imagen (PNG, JPG, SVG) y aparecerá en la esquina de tu factura.</p>
+
+          <h3>¿Qué es Reverse Charge o inversión del sujeto pasivo?</h3>
+          <p>Es un mecanismo fiscal usado en la UE donde el receptor de la factura es responsable de declarar el IVA en lugar del emisor. Útil para facturas intracomunitarias entre empresas (B2B).</p>
+
+          <h3>¿Es legal esta factura?</h3>
+          <p>Esta herramienta genera documentos PDF con formato profesional. Para facturas con validez fiscal oficial (como CFDI en México o facturación electrónica en España), consulta los requisitos de tu autoridad tributaria local. Este generador es ideal para freelancers, autónomos y pequeñas empresas que necesitan facturas claras y profesionales.</p>
+        </section>
+
+        <section>
+          <h2>Rechnung erstellen — Kostenloser Rechnungsgenerator</h2>
+          <p>Erstellen Sie professionelle Rechnungen kostenlos als PDF. Unterstützt deutsche USt.-Sätze (19% und 7%), USt-IdNr., IBAN, BIC und den Reverse-Charge-Hinweis gemäß §13b UStG. Keine Registrierung erforderlich.</p>
+        </section>
+
+        <section>
+          <h2>Free Invoice Generator — Create &amp; Download PDF Invoices</h2>
+          <p>Generate professional invoices for free. Supports US tax rates, international currencies, bank details (IBAN/BIC), and custom logos. No sign-up required — your data stays in your browser.</p>
+        </section>
+      </main>
+    </div>
     <noscript>
-      <h1>Generar Factura Gratis — Crear y Descargar Facturas en PDF</h1>
-      <p>Genera facturas profesionales online gratis. Sin registro. Soporta formatos de España (IVA), México (RFC), Argentina (CUIT), Colombia (NIT), Chile (RUT), Perú (IGV/RUC), Alemania (USt./Rechnung) y EE.UU. (Invoice). Datos bancarios IBAN/BIC. Descarga en PDF al instante.</p>
+      <style>#root { display: block !important; }</style>
     </noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
