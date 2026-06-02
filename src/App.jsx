@@ -24,7 +24,7 @@ export default function App() {
     total,
   } = useInvoice();
 
-  const { templates, saveTemplate, removeTemplate } = useTemplates();
+  const { templates, saveTemplate, removeTemplate, importTemplates } = useTemplates();
 
   const [view, setView] = useState("edit");
   const [logoPreview, setLogoPreview] = useState(inv.logo || null);
@@ -35,11 +35,11 @@ export default function App() {
   const handleDownload = useCallback(async () => {
     setDownloading(true);
     try {
-      await generatePdf("invoice-preview", inv.invoiceNumber);
+      await generatePdf(inv, { subtotal, discountAmt, taxAmt, total });
     } finally {
       setDownloading(false);
     }
-  }, [inv.invoiceNumber]);
+  }, [inv, subtotal, discountAmt, taxAmt, total]);
 
   const handleLoadTemplate = useCallback(
     (tpl) => {
@@ -92,6 +92,7 @@ export default function App() {
               onSave={(name) => saveTemplate(name, inv)}
               onLoad={handleLoadTemplate}
               onDelete={removeTemplate}
+              onImport={importTemplates}
             />
             <div className="flex items-center gap-2">
               <button

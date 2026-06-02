@@ -37,5 +37,26 @@ export function useTemplates() {
     });
   }, []);
 
-  return { templates, saveTemplate: save, removeTemplate: remove };
+  // Merge imported templates; incoming wins on name clash, ids regenerated to stay unique.
+  const importTemplates = useCallback((incoming) => {
+    const list = Array.isArray(incoming) ? incoming : [];
+    const cleaned = list.filter((t) => t && typeof t.name === "string" && t.name.trim());
+    if (cleaned.length === 0) return 0;
+    setTemplates((prev) => {
+      const names = new Set(cleaned.map((t) => t.name));
+      const kept = prev.filter((t) => !names.has(t.name));
+      const added = cleaned.map((t, i) => ({ ...t, id: Date.now() + i }));
+      const next = [...kept, ...added];
+      saveTemplates(next);
+      return next;
+    });
+    return cleaned.length;
+  }, []);
+
+  return {
+    templates,
+    saveTemplate: save,
+    removeTemplate: remove,
+    importTemplates,
+  };
 }
