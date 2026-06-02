@@ -9,6 +9,7 @@ export function useTemplates() {
       id: Date.now(),
       name,
       from: invoice.from,
+      to: invoice.to,
       bankDetails: invoice.bankDetails,
       taxRate: invoice.taxRate,
       taxLabel: invoice.taxLabel,

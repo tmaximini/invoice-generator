@@ -82,6 +82,7 @@ export function useInvoice() {
     setInv((p) => ({
       ...p,
       from: template.from || p.from,
+      to: template.to || p.to,
       bankDetails: template.bankDetails || p.bankDetails,
       taxRate: template.taxRate ?? p.taxRate,
       taxLabel: template.taxLabel || p.taxLabel,
