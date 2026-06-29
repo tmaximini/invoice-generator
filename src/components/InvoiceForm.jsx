@@ -63,6 +63,29 @@ export default function InvoiceForm({
                 value={inv.dueDate}
                 onChange={(e) => set("dueDate", e.target.value)}
               />
+              <div className="flex gap-1 mt-1.5">
+                {[7, 14, 30].map((d) => {
+                  const base = inv.issueDate ? new Date(inv.issueDate) : new Date();
+                  const due = new Date(base.getTime() + d * 86400000)
+                    .toISOString()
+                    .split("T")[0];
+                  const active = inv.dueDate === due;
+                  return (
+                    <button
+                      key={d}
+                      type="button"
+                      onClick={() => set("dueDate", due)}
+                      className={`flex-1 px-2 py-1 rounded-md text-xs font-medium border transition-colors ${
+                        active
+                          ? "bg-amber-400/20 border-amber-400 text-amber-700"
+                          : "bg-gray-50 border-gray-200 text-gray-500 hover:bg-gray-100"
+                      }`}
+                    >
+                      +{d}d
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>

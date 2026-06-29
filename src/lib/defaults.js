@@ -1,5 +1,5 @@
 const today = new Date().toISOString().split("T")[0];
-const in30 = new Date(Date.now() + 30 * 86400000).toISOString().split("T")[0];
+const in14 = new Date(Date.now() + 14 * 86400000).toISOString().split("T")[0];
 
 const deLabels = {
   from: "Von",
@@ -356,7 +356,7 @@ export function createDefaultInvoice(localeKey) {
     invoiceNumber: `${preset.invoicePrefix}001`,
     invoiceTitle: preset.invoiceTitle,
     issueDate: today,
-    dueDate: in30,
+    dueDate: in14,
     from: { name: "", email: "", address: "", taxId: "" },
     to: { name: "", email: "", address: "", taxId: "" },
     bankDetails: { bankName: "", iban: "", bic: "", accountHolder: "" },
